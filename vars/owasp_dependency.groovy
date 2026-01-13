@@ -1,4 +1,3 @@
-def call(){
-  dependencyCheck additionalArguments: '--scan ./ --disableNodeAudit', odcInstallation: 'OWASP'
-  dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+withCredentials([usernamePassword(credentialsId: 'oss-index-creds', usernameVariable: 'OSS_INDEX_USERNAME', passwordVariable: 'OSS_INDEX_PASSWORD')]) {
+    dependencyCheck additionalArguments: "--scan ./ --disableNodeAudit --ossIndexUsername ${OSS_INDEX_USERNAME} --ossIndexPassword ${OSS_INDEX_PASSWORD}", odcInstallation: 'OWASP'
 }
